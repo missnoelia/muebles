@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA Mobiliario</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="navbar">
+    <a href="home.html" class="logo-link">
+        <div class="logo-container">
+            <div class="logo-circle">
+                <img src="img/image-Photoroom.png" alt="DNA Logo" class="logo-image">
+            </div>
+            <span class="brand-name">DNA</span>
+        </div>
+    </a>
+
+    <nav class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Productos</a>
+        <a href="#">Contacto</a>
+    </nav>
+
+    <div class="nav-icons">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <i class="fa-regular fa-user"></i>
+    </div>
+</header>
+
+    <section class="hero" id="hero-slider">
+    <div class="hero-overlay"></div>
+    
+    <button class="arrow prev" id="heroPrev"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="arrow next" id="heroNext"><i class="fa-solid fa-chevron-right"></i></button>
+
+    <div class="hero-content">
+        <h1>Tu casa, tus reglas,<br>nuestro diseño</h1>
+        <p>Mira nuestras ofertas de primavera</p>
+        <a href="home.html" class="btn-main">Ver más</a>
+    </div>
+
+    <div class="slider-dots">
+        <span class="dot active" id="dot0"></span>
+        <span class="dot" id="dot1"></span>
+        <span class="dot" id="dot2"></span>
+    </div>
+</section>
+
+<script src="slider-landing.js"></script>
+<script>
+    let indiceActual = 0;
+    const totalImagenes = 3;
+    const hero = document.getElementById('hero-section');
+    const dots = document.querySelectorAll('.dot');
+    const btnNext = document.getElementById('btn-next');
+    const btnPrev = document.getElementById('btn-prev');
+
+    function actualizarCambio() {
+        // 1. Eliminamos todas las clases de fondo posibles
+        hero.classList.remove('bg-0', 'bg-1', 'bg-2');
+        
+        // 2. Añadimos la clase correspondiente al índice actual
+        hero.classList.add('bg-' + indiceActual);
+        
+        // 3. Actualizamos los puntos (dots)
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === indiceActual);
+        });
+        
+        console.log("Cambiando a imagen índice: " + indiceActual); // Esto te dirá en la consola si funciona
+    }
+
+    btnNext.addEventListener('click', () => {
+        indiceActual = (indiceActual + 1) % totalImagenes;
+        actualizarCambio();
+    });
+
+    btnPrev.addEventListener('click', () => {
+        indiceActual = (indiceActual - 1 + totalImagenes) % totalImagenes;
+        actualizarCambio();
+    });
+</script>
+
+</body>
+</html>
